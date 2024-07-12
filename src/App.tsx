@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.scss";
+import {Counter} from "components";
 
-function App() {
+const App = () => {
     return (
-        <div className="App">
-            <h1>aye</h1>
+        <div className="app">
+            <Counter />
         </div>
     );
-}
+};
 
 export default App;
