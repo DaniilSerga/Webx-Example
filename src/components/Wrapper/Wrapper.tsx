@@ -13,24 +13,24 @@ const Wrapper: FC = observer(() => {
         getPostsAction();
     }, []);
 
-    if (posts?.state === "pending") {
-        return <div>loading</div>;
+    if (!posts) {
+        return null;
     }
 
-    if (posts?.state === "rejected") {
-        return <div>rejected</div>;
-    }
-
-    return (
-        <ul>
-            {posts?.value.map((post) => (
-                <li key={post.id}>
-                    <p>{post.title}</p>
-                    <p>{post.body}</p>
-                </li>
-            ))}
-        </ul>
-    );
+    return posts.case({
+        pending: () => <div>loading</div>,
+        rejected: () => <div>rejected</div>,
+        fulfilled: (value) => (
+            <ul>
+                {value.map((post) => (
+                    <li key={post.id}>
+                        <p>{post.title}</p>
+                        <p>{post.body}</p>
+                    </li>
+                ))}
+            </ul>
+        )
+    });
 });
 
 export default Wrapper;
