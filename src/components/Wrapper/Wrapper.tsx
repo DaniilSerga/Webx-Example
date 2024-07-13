@@ -1,17 +1,35 @@
-import {Counter} from "components/Counter";
 import {observer} from "mobx-react-lite";
-import React, {FC} from "react";
-import CounterStore from "stores/reusable-counter-store";
-
-const counterStore1 = new CounterStore();
-const counterStore2 = new CounterStore();
+import React, {FC, useEffect} from "react";
+import postsStore from "stores/posts-store";
 
 const Wrapper: FC = observer(() => {
+    const {getPostsAction, posts} = postsStore;
+
+    useEffect(() => {
+        console.log(posts);
+    }, [posts]);
+
+    useEffect(() => {
+        getPostsAction();
+    }, []);
+
+    if (posts?.state === "pending") {
+        return <div>loading</div>;
+    }
+
+    if (posts?.state === "rejected") {
+        return <div>rejected</div>;
+    }
+
     return (
-        <>
-            <Counter {...counterStore1} total={counterStore1.total} />
-            <Counter {...counterStore2} total={counterStore2.total} />
-        </>
+        <ul>
+            {posts?.value.map((post) => (
+                <li key={post.id}>
+                    <p>{post.title}</p>
+                    <p>{post.body}</p>
+                </li>
+            ))}
+        </ul>
     );
 });
 
