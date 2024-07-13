@@ -1,3 +1,4 @@
 import {Counter} from "./Counter";
+import {Wrapper} from "./Wrapper";
 
-export {Counter};
+export {Wrapper, Counter};

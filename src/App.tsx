@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.scss";
-import {Counter} from "components";
+import {Wrapper} from "components";
 
 const App = () => {
     return (
         <div className="app">
-            <Counter />
+            <Wrapper />
         </div>
     );
 };

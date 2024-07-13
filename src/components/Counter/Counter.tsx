@@ -1,11 +1,29 @@
-import {observer} from "mobx-react-lite";
+// import {observer} from "mobx-react-lite";
 import React, {FC} from "react";
-import counterStore from "stores/counter-store";
+// import counterStore from "stores/counter-store";
 import styles from "./Counter.module.scss";
 
-const Counter: FC = observer(() => {
-    const {count, increment, decrement, total} = counterStore;
+// const Counter: FC = observer(() => {
+//     const {count, increment, decrement, total} = counterStore;
 
+//     return (
+//         <div className={styles.container}>
+//             <button onClick={() => decrement(1)}>-</button>
+//             <span>{count}</span>
+//             <button onClick={() => increment(1)}>+</button>
+//             <span>{total}</span>
+//         </div>
+//     );
+// });
+
+type Props = {
+    increment: (value: number) => void;
+    decrement: (value: number) => void;
+    count: number;
+    total: number;
+};
+
+const Counter: FC<Props> = ({count, increment, decrement, total}) => {
     return (
         <div className={styles.container}>
             <button onClick={() => decrement(1)}>-</button>
@@ -14,6 +32,6 @@ const Counter: FC = observer(() => {
             <span>{total}</span>
         </div>
     );
-});
+};
 
 export default Counter;
